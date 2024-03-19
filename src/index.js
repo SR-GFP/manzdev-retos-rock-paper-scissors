@@ -1,13 +1,27 @@
+const input = document.getElementsByTagName ("input")
 const playerOptions = document.getElementById("playerOptions");
+
 const game = document.getElementById("game");
 
+const messageDiv = document.getElementById("message");
+
+const contadorGanados = document.getElementById("contadorGanados");
+
+const contadorPerdidos = document.getElementById("contadorPerdidos");
+
+const contadorEmpatados = document.getElementById("contadorEmpatados");
+
+const efectContainer = document.getElementById("efect-container");
+
+let playerChoiceId;
 let playerChoice;
 let cpuChoice;
 
 function playerElectionHandler(event) {
-  if (event.target.tagName === "BUTTON") {
+  if (event.target.tagName === "BUTTON" || event.target.tagName === "INPUT") {
     playerChoice = event.target.value;
-    console.log(playerChoice, cpuChoice);
+    playerChoiceId = document.getElementById(`${event.target.id}`);
+    playerChoiceId.classList.add("selected")
   }
 }
 
@@ -24,27 +38,56 @@ function cpuElectionHandler() {
 
 function gameResultsHandler() {
   if (playerChoice === null || playerChoice === undefined) {
-    console.log("Elije una Opción");
+    messageResult("Elije una Opción");
   } else {
     cpuElectionHandler();
     if (playerChoice === cpuChoice) {
-      console.log(`"Empate" 
-      El Jugador Eligio:"${playerChoice}"
-      La CPU Eligio: "${cpuChoice}"`);
+      messageResult(`"Empate" 
+      El Jugador Elijio:"${playerChoice}"
+      La CPU Elijio: "${cpuChoice}"`);
+      contadorEmpatados.textContent++
     } else if (
       (playerChoice === "piedra" && cpuChoice === "tijeras") ||
       (playerChoice === "papel" && cpuChoice === "piedra") ||
       (playerChoice === "tijeras" && cpuChoice === "papel")
     ) {
-      console.log(`"Ganaste" Jugador Eligio: ${playerChoice} La CPU Eligio: ${cpuChoice}`);
+      winEfect();
+      messageResult(`"Ganaste" Jugador Elijio: ${playerChoice} La CPU Elijio: ${cpuChoice}`);
+      contadorGanados.textContent++
 
     } else {
-      console.log(`"Perdiste" Jugador Eligio: ${playerChoice} La CPU Eligio: ${cpuChoice}`);
+      messageResult(`"Perdiste" Jugador Elijio: ${playerChoice} La CPU Elijio: ${cpuChoice}`);
+      contadorPerdidos.textContent++
     }
+    input.checked = false;
+    playerChoiceId.classList.remove("selected")
     playerChoice = null;
     cpuChoice = null;
   }
 }
 
+function messageResult(message, prefix = "") {
+  messageDiv.removeChild(messageDiv.firstChild);
+  const messageElement = document.createElement("p");
+  messageElement.textContent = `${prefix} ${message}`;
+  messageDiv.appendChild(messageElement)
+
+}
+
+function winEfect() {
+  const randomAngle = (min, max) => {
+    return Math.random() * (max - min) + min;
+  }
+  confetti({
+    angle: randomAngle(55,125),
+    particleCount: randomAngle(50, 100),
+    spread: randomAngle(50, 70),
+    origin: { y: 0.6 }
+  })
+}
+
+function looseEfext() {
+  
+}
 playerOptions.addEventListener("click", playerElectionHandler);
 game.addEventListener("click", gameResultsHandler);

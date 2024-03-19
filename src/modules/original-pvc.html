@@ -5,20 +5,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Original P vs C</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="/src/index.css">
 </head>
 
 <body>
-  <h1>Player Vs CPU Version Original</h1>
+  <h1>Player Vs CPU <br> Version Original</h1>
   <div id="playerOptions">
     <h2>Elije una opción</h2>
-    <button id="piedra" value="piedra" type="button">Piedra</button>
-    <button id="papel" value="papel" type="<button">Papel</button>
+    <input id="btn-rock" type="checkbox" class="btn-rock" value="piedra">
+    <label class="lbl-rock" for="btn-rock">
+      <img src="/src/assets/gratis-png-tijeras-de-piedra-papel-iconos-de-computadora-tijeras.png" alt="">
+    </label>
+    <button id="papel" value="papel" type="button">Papel</button>
     <button id="tijera" value="tijeras" type="button">Tijeras</button>
+  </div>
+  <div class="contador">
+    <p>Ganados: <span id="contadorGanados">0</p>
+    <p>Perdidos: <span id="contadorPerdidos">0</p>
+    <p>Empatados: <span id="contadorEmpatados">0</p>
   </div>
   <div class="game">
     <button id="game" type="button">JUGAR</button>
-    
+  </div>
+  <div id="message">
+  </div>
+  <div class="efect-container" id="efect-container">
   </div>
 </body>
 <script type="module" src="../index.js"></script>
+
 </html>

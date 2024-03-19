@@ -1,1 +1,48 @@
+.selected{
+  background-color: darkblue;
+  color: white;
+}
 
+.btn-rock{
+  /*display: none;*/
+}
+
+.lbl-rock{
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.lbl-rock:checked + label img{
+  background: darkred;
+  border: dotted;
+  
+}
+
+.lbl-rock img{
+  width: 50px;
+  height: auto;
+}
+.efect-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.confeti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation: confeti-fall linear 5s infinite;
+}
+
+@keyframes confeti-fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
